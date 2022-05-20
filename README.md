@@ -1,6 +1,7 @@
 # Clipboy
 
-Clipboy is a cross-platform, minimal clipboard manager.
+Clipboy is a cross-platform, minimal clipboard manager. Designed to be integrated with other tools
+like fzf, rofi, or dmenu.
 
 ## Features
 
@@ -18,5 +19,5 @@ Clipboy is a cross-platform, minimal clipboard manager.
 
 ```shell
 # Show a menu to update the clipboard from history
-clipboy list | fzf --read0 --print0 | clipboy paste
+clipboy list | fzf --read0 --print0 | clipboy copy
 ```
