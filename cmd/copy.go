@@ -17,8 +17,16 @@ var copyCmd = &cobra.Command {
         if err != nil {
             panic(err)
         }
-        if len(data) > 0 {
-            clipboard.Write(clipboard.FmtText, data)
+
+        ii := 0
+        for ii < len(data) {
+            if data[ii] == 0 {
+                break
+            }
+            ii++
+        }
+        if ii > 0 {
+            clipboard.Write(clipboard.FmtText, data[:ii])
         }
     },
 }
