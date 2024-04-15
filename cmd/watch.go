@@ -27,8 +27,6 @@ var watchCmd = &cobra.Command {
 
         ch := clipboard.Watch(context.Background(), clipboard.FmtText)
         for data := range ch {
-            println(string(data))
-
             stmt, err := db.Prepare("INSERT INTO history (text) VALUES(?)")
             if err != nil {
                 panic(err)
@@ -38,6 +36,9 @@ var watchCmd = &cobra.Command {
             if err != nil {
                 panic(err)
             }
+
+            // Clean up old items
+            db.Exec("DELETE FROM history WHERE time < datetime('now', '-7 days')")
         }
     },
 }
