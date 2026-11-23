@@ -1,8 +1,9 @@
 package cmd
 
 import (
-    "os"
     "database/sql"
+    "os"
+    "path/filepath"
 
     "github.com/adrg/xdg"
     "github.com/spf13/cobra"
@@ -10,7 +11,11 @@ import (
 )
 
 func openDb () *sql.DB {
-    db, err := sql.Open("sqlite3", xdg.CacheHome+"/clipboy.db")
+    dir := filepath.Join(xdg.StateHome, "clipboy")
+    if err := os.MkdirAll(dir, 0700); err != nil {
+        panic(err)
+    }
+    db, err := sql.Open("sqlite3", filepath.Join(dir, "clipboy.db"))
     if err != nil {
         panic(err)
     }
