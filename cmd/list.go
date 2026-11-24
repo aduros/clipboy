@@ -5,17 +5,16 @@ import (
     "os"
     "path/filepath"
 
-    "github.com/adrg/xdg"
     "github.com/spf13/cobra"
     _ "github.com/mattn/go-sqlite3"
 )
 
 func openDb () *sql.DB {
-    dir := filepath.Join(xdg.StateHome, "clipboy")
-    if err := os.MkdirAll(dir, 0700); err != nil {
+    path := dbFilePath()
+    if err := os.MkdirAll(filepath.Dir(path), 0700); err != nil {
         panic(err)
     }
-    db, err := sql.Open("sqlite3", filepath.Join(dir, "clipboy.db"))
+    db, err := sql.Open("sqlite3", path)
     if err != nil {
         panic(err)
     }

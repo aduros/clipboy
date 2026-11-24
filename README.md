@@ -15,6 +15,8 @@ like fzf, rofi, or dmenu.
 
 2. Run `clipboy list` to get the clipboard history.
 
+3. Run `clipboy db-file` to print the path to `clipboy.db` without creating it.
+
 ## Example
 
 ```shell
